@@ -30,6 +30,7 @@ const router = createBrowserRouter([
     path: "/confirm-booking",
     element: <ConfirmBooking />,
   },
+
   {
     path: "/booking-success",
     element: <Success />,

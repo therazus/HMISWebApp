@@ -31,8 +31,8 @@ export default function BasicPopover(props) {
   const [roomList, setRoomList] = React.useState([]);
   const [Form, setForm] = React.useState({
     date: [dayjs(), dayjs().add(1, "day")],
-    adults: "",
-    children: "",
+    adults: 2,
+    children: 1,
     promo: "",
   });
 
@@ -242,6 +242,9 @@ export default function BasicPopover(props) {
                           <MenuItem value={4} className="menuitem">
                             Four
                           </MenuItem>
+                          <MenuItem value={5} className="menuitem">
+                            Five
+                          </MenuItem>
                         </Select>
                       </FormControl>
                     </Box>
@@ -266,6 +269,9 @@ export default function BasicPopover(props) {
                           sx={{ color: "#030957" }}
                           SelectDisplayProps={{ className: "labelfont" }}
                         >
+                          <MenuItem value={0} className="menuitem">
+                            __
+                          </MenuItem>
                           <MenuItem value={1} className="menuitem">
                             One
                           </MenuItem>

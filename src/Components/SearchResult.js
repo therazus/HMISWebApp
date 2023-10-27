@@ -28,6 +28,8 @@ import {
 import img1 from "../Images/349059422.jpeg";
 import img2 from "../Images/349059406.jpeg";
 
+import { calculateBB, calculateHB, calculateFB } from "../Utils/calculateRates";
+
 const RoomTypeImages = ({ roomType }) => {
   const [images, setImages] = useState([]);
   const imageListRef = ref(storage, `images/Hotel/RoomType/${roomType}/`);
@@ -80,23 +82,6 @@ const SearchResult = (props) => {
 
     setTotal(totalPrice);
   }, [selectedRooms]);
-
-  function calculateBB(roomTypeVal, adults, children) {
-    const cost = roomTypeVal.price + 2500 * (adults + children * 0.6);
-    return cost;
-  }
-  function calculateHB(roomTypeVal, adults, children) {
-    const cost = Math.floor(
-      roomTypeVal.price + 5000 * (adults + children * 0.6)
-    );
-    return cost;
-  }
-  function calculateFB(roomTypeVal, adults, children) {
-    const cost = Math.floor(
-      roomTypeVal.price + 7500 * (adults + children * 0.6)
-    );
-    return cost;
-  }
 
   const handleBooking = () => {
     if (bookingIds.length === 0) {

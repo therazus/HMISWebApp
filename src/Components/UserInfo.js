@@ -432,7 +432,6 @@ const HotelBookingForm = (props) => {
             </Row>
           </div>
         )}
-        ;
       </div>
     </div>
   );

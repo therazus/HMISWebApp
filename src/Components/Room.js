@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
 import "../Styles/room.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ImageCarousel from "./Carousal";
@@ -10,10 +12,24 @@ import { Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { themeTyp } from "../Styles/Theme";
 
+import { convertDateToFormat } from "../Utils/dateUtil";
+import ipAddress from "../config";
+import { Today } from "@mui/icons-material";
+
 const PhotoCard = ({ type, adult, child, size, description }) => {
+  const navigate = useNavigate();
   const [images, setImages] = React.useState([]);
 
+  const [roomList, setRoomList] = React.useState([]);
+
   const imageListRef = ref(storage, `images/Hotel/RoomType/${type}/`);
+
+  const [Form, setForm] = React.useState({
+    date: [dayjs(), dayjs().add(1, "day")],
+    adults: adult,
+    children: child,
+    promo: "",
+  });
 
   useEffect(() => {
     listAll(imageListRef).then((res) => {
@@ -27,6 +43,25 @@ const PhotoCard = ({ type, adult, child, size, description }) => {
 
   const uniqueImages = [...new Set(images)];
   console.log(uniqueImages);
+
+  const handleBook = () => {
+    const fcin = convertDateToFormat(Form.date[0]);
+    const fcout = convertDateToFormat(Form.date[1]);
+
+    const apiUrl = `${ipAddress}/room/booking/search-availability?checkIn=${fcin}&checkOut=${fcout}&adultCount=${Form.adults}&childrenCount=${Form.children}&promo=${Form.promo}`;
+    fetch(apiUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        setRoomList(data);
+        console.log(data);
+        const firstElement = data[0];
+        const Roomdata = [firstElement];
+
+        navigate("/book-room", {
+          state: { Roomdata: Roomdata, form: Form },
+        });
+      });
+  };
 
   return (
     <>
@@ -53,76 +88,13 @@ const PhotoCard = ({ type, adult, child, size, description }) => {
                 </Typography>
               </ThemeProvider>
 
-              <button className="btnbooking">Book Now</button>
+              <button className="btnbooking" onClick={handleBook}>
+                Book Now
+              </button>
             </div>
           </div>
         </div>
       </div>
-
-      {/* <div className="container">
-        <div className="photocontainer">
-          <div className="photo-card">
-            <div className="photo-background">
-              <ImageCarousel images={kingImages} />
-            </div>
-            <div className="photo-details">
-              <ThemeProvider theme={themeTyp}>
-                <Typography variant="PhotoTopic">KING SUITE</Typography>
-                <Typography variant="body1">
-                  <p>
-                    with Hanthana mountain views
-                    <br />
-                    <br></br>
-                    Max occupancy: 2 adults and 1 child
-                    <br />
-                    Room size: 25 sqm
-                    <br />
-                    <br></br>
-                    Sweeping views of the majestic Hanthana mountains greet you
-                    as soon as you enter the Suite. Equipped with a panoramic
-                    seating area, and dining area our Suites are ideal for
-                    couples that yearn that extra privacy and indulgence.
-                  </p>
-                </Typography>
-              </ThemeProvider>
-
-              <button className="btnbooking">Book Now</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="container">
-        <div className="photocontainer">
-          <div className="photo-card">
-            <div className="photo-background">
-              <ImageCarousel images={famImages} />
-            </div>
-            <div className="photo-details">
-              <ThemeProvider theme={themeTyp}>
-                <Typography variant="PhotoTopic">FAMILY SUITE</Typography>
-                <Typography variant="body1">
-                  <p>
-                    with mountain views
-                    <br />
-                    <br></br>
-                    Max occupancy: 4 pax
-                    <br />
-                    Room size: 41 sqm
-                    <br />
-                    <br></br>
-                    Our biggest rooms that are ideal for families or groups of
-                    friends. Take in mesmerising views of the mountains from the
-                    balcony while enjoying the extra space.
-                  </p>
-                </Typography>
-              </ThemeProvider>
-
-              <button className="btnbooking">Book Now</button>
-            </div>
-          </div>
-        </div>
-      </div> */}
     </>
   );
 };
