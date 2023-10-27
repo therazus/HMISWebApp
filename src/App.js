@@ -43,15 +43,9 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  // const { pathname } = useLocation();
-
   return (
     <div className="App">
-      <NavigationBar />
       <RouterProvider router={router} />
-      <div id="footer">
-        <Footer />
-      </div>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -50,6 +51,8 @@ function a11yProps(index) {
 
 const PaymentForm = (props) => {
   const navigate = useNavigate();
+
+  const [disConfirm, setDisConfirm] = useState(false);
   const [value, setValue] = React.useState(0);
   // console.log(props.bookingData.customerId);
 
@@ -58,7 +61,7 @@ const PaymentForm = (props) => {
   };
 
   const handlePaymentConfirm = () => {
-    // Create the data object to send in the POST request
+    setDisConfirm(true);
     const requestBody = {
       bookingIdList: props.bookingData.bookingIds,
       customerId: props.bookingData.customerId,
@@ -246,6 +249,7 @@ const PaymentForm = (props) => {
               className="book-btn"
               style={{ marginTop: "-70px" }}
               onClick={handlePaymentConfirm}
+              disabled={disConfirm}
             >
               <Typography variant="button">Confirm</Typography>
             </button>

@@ -6,6 +6,8 @@ import { themeTyp } from "../Styles/Theme";
 import "../Styles/success.css";
 import Upperdiv from "../Components/upperDiv";
 import img1 from "../Images/success.jpg";
+import NavigationBar from "../Components/NavigationBar";
+import Footer from "../Components/Footer";
 
 const BookingSuccessMessage = () => {
   const location = useLocation();
@@ -23,6 +25,7 @@ const BookingSuccessMessage = () => {
   if (bookingIds != null) {
     return (
       <>
+        <NavigationBar />
         <div className="nav-fill"></div>
         <div className="book-confirm">
           <img className="success-img" src={img1} />
@@ -37,6 +40,10 @@ const BookingSuccessMessage = () => {
               Confirmation Email has been sent to your email address.
             </Typography>
           </ThemeProvider>
+        </div>
+
+        <div id="footer">
+          <Footer />
         </div>
       </>
     );

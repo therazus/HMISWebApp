@@ -83,9 +83,9 @@ const HeroComponent = () => {
                       </Typography>
                     </ListGroup.Item>
                     <ListGroup.Item>
-                      <button className="btnbooking">
+                      {/* <button className="btnbooking">
                         <Typography variant="button">Book Now</Typography>
-                      </button>
+                      </button> */}
                     </ListGroup.Item>
                   </ListGroup>
                 </ThemeProvider>
@@ -120,9 +120,9 @@ const HeroComponent = () => {
                       </Typography>
                     </ListGroup.Item>
                     <ListGroup.Item>
-                      <button className="btnbooking">
+                      {/* <button className="btnbooking">
                         <Typography variant="button">Book Now</Typography>
-                      </button>
+                      </button> */}
                     </ListGroup.Item>
                   </ListGroup>
                 </ThemeProvider>
@@ -156,9 +156,9 @@ const HeroComponent = () => {
                       </Typography>
                     </ListGroup.Item>
                     <ListGroup.Item>
-                      <button className="btnbooking">
+                      {/* <button className="btnbooking">
                         <Typography variant="button">Book Now</Typography>
-                      </button>
+                      </button> */}
                     </ListGroup.Item>
                   </ListGroup>
                 </ThemeProvider>

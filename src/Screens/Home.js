@@ -5,8 +5,12 @@ import Offer from "../Components/Offer";
 import Experiences from "../Components/Experiences";
 import Restaurant from "../Components/Restaurant";
 import ipaddress from "../config";
+import Loading from "../Components/Loading";
+import NavigationBar from "../Components/NavigationBar";
+import Footer from "../Components/Footer";
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
   const [roomTypes, setRoomTypes] = useState([]);
 
   useEffect(() => {
@@ -15,10 +19,14 @@ export default function Home() {
       .then((res) => res.json())
       .then((result) => {
         setRoomTypes(result);
+        setLoading(false);
       });
   }, []);
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <>
+      <NavigationBar />
       <div id="Home">
         <SearchBox />
       </div>
@@ -42,6 +50,9 @@ export default function Home() {
       </div>
       <div id="Restaurant">
         <Restaurant />
+      </div>
+      <div id="footer">
+        <Footer />
       </div>
     </>
   );

@@ -169,7 +169,13 @@ const SearchResult = (props) => {
       });
   };
 
-  if (!props.roomData[0]) return <div>Hi</div>;
+  if (!props.roomData[0])
+    return (
+      <div>
+        There is no room available for the selected dates. Please try again with
+        different dates.
+      </div>
+    );
 
   return (
     <div>

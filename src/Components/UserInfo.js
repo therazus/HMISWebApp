@@ -16,6 +16,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const HotelBookingForm = (props) => {
+  const [disSubmit, setDisSubmit] = useState(true);
+
   const [showDetails, setShowDetails] = useState(true);
   const [detButton, setDetButton] = useState(false);
 
@@ -67,8 +69,10 @@ const HotelBookingForm = (props) => {
       dateOfBirth === ""
     ) {
       setIsNewCustomerValid(false);
+      setDisSubmit(true);
     } else {
       setIsNewCustomerValid(true);
+      setDisSubmit(false);
     }
   }, [newCustomerData]);
 
@@ -98,6 +102,7 @@ const HotelBookingForm = (props) => {
     setEmail(newEmail);
     setShowError(!isValidEmail(newEmail));
     setCheckMail(!isValidEmail(newEmail));
+    setDisSubmit(!isValidEmail(newEmail));
   };
 
   // =======================================================
@@ -134,6 +139,7 @@ const HotelBookingForm = (props) => {
 
   console.log(fName);
   const handleSubmit = () => {
+    setDisSubmit(true);
     // Create the data object to send in the POST request
     const requestBody = {
       nicNumber: nic,
@@ -164,6 +170,7 @@ const HotelBookingForm = (props) => {
           console.log("POST request successful");
           setShowDetails(false);
           setDetButton(true);
+
           return response.json();
         } else {
           // Handle error response
@@ -184,6 +191,7 @@ const HotelBookingForm = (props) => {
     if (dob !== null) {
       const isMatch = validateNICWithBirthdate(inputValue, dob);
       setValidNIC(!isMatch);
+      setDisSubmit(!isMatch);
     }
     if (inputValue.length >= 10) {
       // Make a GET fetch call to the server
@@ -423,7 +431,8 @@ const HotelBookingForm = (props) => {
                 className="book-btn"
                 type="button"
                 onClick={handleSubmit}
-                disabled={!isNewCustomerValid}
+                disabled={disSubmit}
+                // disabled={!isNewCustomerValid}
               >
                 <ThemeProvider theme={themeTyp}>
                   <Typography variant="button">Submit</Typography>

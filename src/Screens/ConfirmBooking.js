@@ -9,6 +9,8 @@ import { Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { themeTyp } from "../Styles/Theme";
 
+import NavigationBar from "../Components/NavigationBar";
+import Footer from "../Components/Footer";
 import img1 from "../Images/offers.jpg";
 
 export default function ConfirmBooking() {
@@ -42,6 +44,7 @@ export default function ConfirmBooking() {
 
   return (
     <>
+      <NavigationBar />
       <div
         className="hero-image"
         style={{
@@ -112,6 +115,10 @@ export default function ConfirmBooking() {
             </div>
           </Col>
         </Row>
+      </div>
+
+      <div id="footer">
+        <Footer />
       </div>
     </>
   );

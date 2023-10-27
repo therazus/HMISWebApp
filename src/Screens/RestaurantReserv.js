@@ -8,12 +8,15 @@ import "../Styles/image-card-materialize.css";
 import { ThemeProvider } from "@mui/material/styles";
 import { themeTyp } from "../Styles/Theme";
 import { Typography } from "@mui/material";
+import NavigationBar from "../Components/NavigationBar";
+import Footer from "../Components/Footer";
 
 import img1 from "../Images/tableplan.png";
 
 export default function RestaurantReserv() {
   return (
     <>
+      <NavigationBar />
       <Restaurant />
 
       <Container
@@ -52,6 +55,10 @@ export default function RestaurantReserv() {
           </Col>
         </Row>
       </Container>
+
+      <div id="footer">
+        <Footer />
+      </div>
     </>
   );
 }

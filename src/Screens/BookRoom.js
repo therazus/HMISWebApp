@@ -5,6 +5,9 @@ import SearchResult from "../Components/SearchResult";
 import { ThemeProvider } from "@mui/material/styles";
 import { themeTyp } from "../Styles/Theme";
 
+import NavigationBar from "../Components/NavigationBar";
+import Footer from "../Components/Footer";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Styles/Pricing-Table.css";
 
@@ -14,6 +17,7 @@ export default function BookRoom() {
   const location = useLocation();
   return (
     <>
+      <NavigationBar />
       <div
         className="hero-image"
         style={{
@@ -55,6 +59,9 @@ export default function BookRoom() {
           roomData={location.state ? location.state.Roomdata : {}}
           selectedValues={location.state ? location.state.form : {}}
         />
+      </div>
+      <div id="footer">
+        <Footer />
       </div>
     </>
   );
