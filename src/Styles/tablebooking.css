@@ -104,5 +104,10 @@
         color: #030957;
     }
 
+    &:disabled {
+      background-color: #8289d5;
+      color: #ffffff;
+    }
+
    
   }
